@@ -38,13 +38,13 @@ to this section's matching END comment to see page-specific styles.
 /* Import fonts */
 @font-face {
   font-family: PPMondWest;
-  src: url("/assets/PPMondwest-Regular.woff2")
+  src: url("../assets/PPMondwest-Regular.woff2")
     format("woff2");
 }
 @font-face {
   font-family: PPMondWest;
   font-weight: bold;
-  src: url("/assets/PPMondwest-Bold.woff2")
+  src: url("../assets/PPMondwest-Bold.woff2")
     format("woff2");
 }
 
