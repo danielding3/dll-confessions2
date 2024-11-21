@@ -16,6 +16,7 @@ import anime from 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.es.js';
 export function router ()   {
   console.log("router running: current path: " + window.location.pathname)
   let path = window.location.pathname;
+  console.log("path: " + path)
   if (path === '/') {
     console.log('show intro')
     showIntroduction();
