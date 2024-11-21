@@ -20,9 +20,9 @@ export function router ()   {
   if (path === '/dll-confessions2/public/index.html') {
     console.log('show intro')
     showIntroduction();
-  } else if (path ==='/dll-confessions2/public/app') {
+  } else if (path ==='/app') {
     showApp();
-  } else if (path ==='/dll-confessions2/public/confessions') {
+  } else if (path ==='/confessions') {
     showConfessions();
   }
 }
