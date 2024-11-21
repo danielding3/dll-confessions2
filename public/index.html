@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+
+    <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+    <title>Hello World!</title>
+
+    <!-- The website stylesheet -->
+    <link rel="stylesheet" href="./css/style.css" />
+      <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <!-- The website JavaScript file -->
+    <!-- <script src="./js/script.js" defer></script> -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/addons/p5.sound.min.js"></script>
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/letterizejs@2.0.1/lib/letterize.min.js"></script>
+
+    <!-- <script src="anime.min.js"></script> -->
+
+  </head>
+  <body>
+    <div class="container">
+      <!-- <h1 id="title">Accept/ webcam permissions</h1> -->
+      <div id="canvas"></div>
+      <script type="module" src="./js/sketch.js"></script>
+      <script type="module" src="./js/router.js"></script>
+    </div>
+  </body>
+</html>
