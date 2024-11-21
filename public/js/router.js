@@ -9,7 +9,7 @@ import { getData, insertData } from './database.js';
 // import anime from 'animejs';
 // import Letterize from 'letterizejs';
 import anime from 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.es.js';
-import { Letterize } from 'https://cdn.jsdelivr.net/npm/letterizejs@2.0.1/lib/letterize.min.js';
+// import { Letterize } from 'https://cdn.jsdelivr.net/npm/letterizejs@2.0.1/lib/letterize.min.js';
 
 
 
