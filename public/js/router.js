@@ -17,12 +17,12 @@ export function router ()   {
   console.log("router running: current path: " + window.location.pathname)
   let path = window.location.pathname;
   console.log("path: " + path)
-  if (path === '/') {
+  if (path === '/dll-confessions2/public/index.html') {
     console.log('show intro')
     showIntroduction();
-  } else if (path ==='/app') {
+  } else if (path ==='/dll-confessions2/public/app') {
     showApp();
-  } else if (path ==='/confessions') {
+  } else if (path ==='/dll-confessions2/public/confessions') {
     showConfessions();
   }
 }
