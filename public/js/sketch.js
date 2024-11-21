@@ -17,7 +17,7 @@ const RIGHT_BOT = 374;
 const CLOSED_THRESHOLD = 4.4;
 
 let eyeCloseStartTime = 0; // Timestamp when eyes were first detected as closed
-const CLOSE_DURATION_THRESHOLD = 500; // Minimum duration (ms) for eyes to be considered closed
+const CLOSE_DURATION_THRESHOLD = 300; // Minimum duration (ms) for eyes to be considered closed
 
 let faceMesh;
 let video;
@@ -97,21 +97,21 @@ p.draw = function () {
     // console.log(face)
 
 //  Drawing face points
-    // for (let j = 0; j < leftEyeTop.length; j++) {
-    //   let keypointLET = face.keypoints[leftEyeTop[j]]
-    //   let keypointRET = face.keypoints[rightEyeTop[j]]
+    for (let j = 0; j < leftEyeTop.length; j++) {
+      let keypointLET = face.keypoints[leftEyeTop[j]]
+      let keypointRET = face.keypoints[rightEyeTop[j]]
 
-    //   let keypointLEB = face.keypoints[leftEyeBot[j]]
-    //   let keypointREB = face.keypoints[rightEyeBot[j]]
-    //   p.noStroke();
-    //   p.fill(0, 255, 0);
-    //   p.circle(keypointLET.x, keypointLET.y, 2);
-    //   p.circle(keypointRET.x, keypointRET.y, 2);
+      let keypointLEB = face.keypoints[leftEyeBot[j]]
+      let keypointREB = face.keypoints[rightEyeBot[j]]
+      p.noStroke();
+      p.fill(0, 255, 0);
+      p.circle(keypointLET.x, keypointLET.y, 2);
+      p.circle(keypointRET.x, keypointRET.y, 2);
 
-    //   p.fill(255, 0, 0);
-    //   p.circle(keypointLEB.x, keypointLEB.y, 2);    
-    //   p.circle(keypointREB.x, keypointREB.y, 2);     
-    // }
+      p.fill(255, 0, 0);
+      p.circle(keypointLEB.x, keypointLEB.y, 2);    
+      p.circle(keypointREB.x, keypointREB.y, 2);     
+    }
     
 
 //  ––––––––––––––
@@ -137,7 +137,7 @@ p.draw = function () {
       //  Eye is closed
         if (p.millis() - eyeCloseStartTime >= CLOSE_DURATION_THRESHOLD ) {
           playSound();
-          // document.getElementById('blackout').style.opacity = '1';
+          document.getElementById('blackout').style.opacity = '0.95';
           document.getElementById('textInput').removeAttribute("disabled")
           document.getElementById('textInput').click();
           document.getElementById('textInput').focus();
@@ -150,7 +150,7 @@ p.draw = function () {
       if (!isEyeOpen) {
         isEyeOpen = true;
         pauseSound();
-        document.getElementById('blackout').style.opacity = '0';
+        document.getElementById('blackout').style.opacity = '0.1';
         document.getElementById('textInput').setAttribute("disabled","")
 
 

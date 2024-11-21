@@ -1,5 +1,7 @@
 // creating a simple router for my SPA
 import { sketch } from './sketch.js'
+import { getData, insertData } from './database.js';
+
 // import p5 from 'p5'
 // import anime from 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.es.js';
 // import { Letterize } from "../node_modules/letterizejs/lib/letterize.js"
@@ -7,6 +9,7 @@ import { sketch } from './sketch.js'
 // import anime from 'animejs';
 // import Letterize from 'letterizejs';
 import anime from 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.es.js';
+import { Letterize } from 'https://cdn.jsdelivr.net/npm/letterizejs@2.0.1/lib/letterize.min.js';
 
 
 
@@ -127,25 +130,39 @@ function showApp() {
     <div id="intro" class="h-full w-screen fixed inset-0 overflow-hidden flex flex-col items-center justify-center">
       <div class="mx-auto flex flex-col items-center">
         <h1 class="text-4xl text-center mb-8">Close your eyes and think of a secret...</h1>
-        <textarea 
-          id="textInput" 
-          class="block w-full p-2 mb-2 mt-8 border-2 border-black rounded-lg active:outline-none"
-          name="textInput" 
-          rows="4" 
-          placeholder="Your secret..."
-          disabled
-        >
-        </textarea>
+        <form action="" id="messageForm" class="flex flex-col items-center m-8 w-full">
+          <textarea 
+            id="textInput" 
+            class="block w-full p-4 mb-2 mt-8 border-2 border-black placeholder:text-slate-400 rounded-lg disabled:bg-gray-300 disabled:border-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed transition duration-2000 active:outline-none"
+            name="textInput" 
+            rows="4" 
+            placeholder="( you will be able to type when you hear the music... )"
+            disabled
+          ></textarea>
+          <button type="submit" class="button text-slate-400 transition hover:text-black mx-4 my-2">submit confession</button>
+        </form>
         <div id="canvas"></div>
-        <div id="blackout" class="w-full h-full absolute top-0 left-0 transition-opacity duration-1000 bg-black opacity-0 pointer-events-none"></div>
+        <div id="blackout" class="opacity-0 w-full h-full absolute top-0 left-0 transition-opacity duration-1000 bg-black opacity-0 pointer-events-none"></div>
         <div class="fixed bottom-0 left-0 right-0 flex justify-between p-4">
-          <button id="btn-intro" class="text-slate-300 hover:text-black mx-4 my-2">Back</button>
-          <button id="btn-info" class="text-slate-300 hover:text-black mx-4 my-2">Info</button>
+          <button id="btn-intro" class="text-slate-300 hover:text-black mx-4 my-2 transition">Back</button>
+          <button id="btn-info" class="text-slate-300 hover:text-black mx-4 my-2 transition">Info</button>
         </div>
       </div>
     </div>
   `
+  
   new p5(sketch, document.getElementById('canvas'))
+    // Add form submission handler
+    document.getElementById('messageForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      console.log('submitting...')
+      const message = document.getElementById("textInput").value;
+
+      await insertData(message);
+      document.getElementById("textInput").value = ''; // Clear the input
+      // Optionally navigate to confessions page
+      navigateTo('/confessions');
+    });
   
   document.getElementById('btn-intro').addEventListener("click", () => {
     document.getElementById('canvas').innerHTML = '' //disposing of sketch
@@ -154,13 +171,32 @@ function showApp() {
 }
 function showConfessions() {
   document.body.innerHTML=`
-    <div id="confessions">
-      <h1>Confessions</h1>
+    <div id="confessions" class="w-screen h-screen flex flex-col items-center justify-center">
+      <h1 class="text-4xl text-center m-8">Confessions</h1>
+      <div id="msgs" class="w-full h-full"></div>
+      <button id="btn-app" class="fixed bottom-0 left-0 right-0 text-slate-400 hover:text-black mx-4 my-8 transition">have another confession to make?</button>
     </div>
   `
+  // Load and display confessions
+  loadConfessions();
+  document.getElementById('btn-app').addEventListener("click", () => navigateTo('/app'))
 }
 
-
+async function loadConfessions() {
+  const messages = await getData();
+  console.log("messages " + JSON.stringify(messages))
+  if (messages) {
+    const msgsContainer = document.getElementById('msgs');
+    messages.forEach(({confession}) => {
+      const messageTemplate = `
+        <div class="max-w-40" style="position:absolute;left:${Math.random()*screen.width}px;top:${Math.random()*screen.height}px">
+          <div>${confession}</div>
+        </div>
+      `;
+      msgsContainer.insertAdjacentHTML('beforeend', messageTemplate);
+    });
+  }
+}
 // Handle browser back/forward navigation
 window.addEventListener('popstate', router);
 
